@@ -1,7 +1,12 @@
+// import api from "..";
+
 import api from "..";
+
+// import { api } from "..";
 
 
 export const login = (username,password) => {
+    console.log("_____new__res+++++");
     return api.post('accounts/farmer-login/',{username:username,password:password});
 }
 export const registerDevice = (token) => {
