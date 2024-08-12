@@ -7,5 +7,8 @@ import HomeActiveTapIcon from './home-active.png'
 import PaymentActiveTabIcon from './payment-active.png'
 import StatusActiveTabIcon from './status-active.png'
 import ProfileActiveTabIcon from './profile-active.png'
+import BackIcon from './back-icon.png'
+import TimeIcon from './time-icon.png'
 
-export {ProfileActiveIcon,HomeIcon,ProfileTabIcon,StatusTabIcon,PaymentTabIcon,HomeActiveTapIcon,PaymentActiveTabIcon,StatusActiveTabIcon,ProfileActiveTabIcon}
+
+export {ProfileActiveIcon,HomeIcon,ProfileTabIcon,StatusTabIcon,PaymentTabIcon,HomeActiveTapIcon,PaymentActiveTabIcon,StatusActiveTabIcon,ProfileActiveTabIcon, BackIcon, TimeIcon}

@@ -89,14 +89,14 @@ android {
     //         keyPassword 'android'
     //     }
     // }
-    signingConfigs {
-        release {
-            storeFile file('../jeeva-milk.keystore')
-            storePassword 'jeevaadmin'
-            keyAlias 'Jeeva-alias'
-            keyPassword 'jeevaadmin'
-        }
+   signingConfigs {
+    release {
+        storeFile file('../jeeva-keystore.keystore')
+        storePassword 'jeeva@123'
+        keyAlias 'Jeeva-alias'
+        keyPassword 'jeeva@123'
     }
+}
     buildTypes {
         debug {
             signingConfig signingConfigs.debug

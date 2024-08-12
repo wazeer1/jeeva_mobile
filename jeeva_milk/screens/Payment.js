@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { COLORS } from '../Components/constants/constants';
+import React, {useEffect, useState} from 'react';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
+import {COLORS} from '../Components/constants/constants';
 import PaymentCard from '../Components/PaymentCard';
 import api from '../api';
+import Header from './Header';
 
-export default function Payment({ navigation }) {
+export default function Payment({navigation}) {
   const [paymentData, setPaymentData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -16,7 +17,10 @@ export default function Payment({ navigation }) {
       if (response.data.app_data.StatusCode === 6000) {
         setPaymentData(response.data.app_data.data);
       } else {
-        console.error('Unexpected StatusCode:', response.data.app_data.StatusCode);
+        console.error(
+          'Unexpected StatusCode:',
+          response.data.app_data.StatusCode,
+        );
       }
     } catch (error) {
       console.error('Error fetching payment data:', error);
@@ -31,17 +35,22 @@ export default function Payment({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Header />
       <View style={styles.header}>
         <Text style={styles.headerText}>Payments</Text>
       </View>
       <FlatList
         data={paymentData}
-        renderItem={({ item }) => <PaymentCard item={item} />}
+        renderItem={({item}) => <PaymentCard item={item} />}
         keyExtractor={(item, index) => index.toString()}
         refreshing={refreshing}
         onRefresh={fetchPaymentData}
-        ListEmptyComponent={<Text style={styles.emptyMessage}>No payment data available.</Text>}
-        contentContainerStyle={paymentData.length === 0 ? styles.emptyContainer : null}
+        ListEmptyComponent={
+          <Text style={styles.emptyMessage}>No payment data available.</Text>
+        }
+        contentContainerStyle={
+          paymentData.length === 0 ? styles.emptyContainer : null
+        }
       />
     </View>
   );

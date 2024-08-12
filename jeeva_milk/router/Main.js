@@ -6,6 +6,7 @@ import LoginScreen from '../screens/LoginScreen';
 import BottomCurved from '../Components/BottomCurved';
 import BottomTabNavigator from './BottomTabNavigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Notifications from '../screens/Notifications';
 
 const Stack = createStackNavigator();
 
@@ -41,6 +42,11 @@ const Main = () => {
         <Stack.Screen
           name="Private"
           component={BottomTabNavigator}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={Notifications}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
