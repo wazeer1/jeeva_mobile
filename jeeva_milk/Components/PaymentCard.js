@@ -32,11 +32,11 @@ const PaymentCard = ({item}) => {
       </View>
       <View style={{alignItems: 'flex-end', gap: 10}}>
         <View style={{flexDirection: 'row', gap: 10}}>
-          <Text>{item?.created_at}</Text>
+          <Text style={{color:"#000"}}>{item?.created_at}</Text>
           <Image source={CalenderIcon} />
         </View>
         <View style={{flexDirection: 'row', gap: 10}}>
-          <Text>Bank</Text>
+          <Text style={{color:'#000'}}>Bank</Text>
           <Image source={BankIcon} />
         </View>
         {/* <TouchableOpacity style={styles.downloadButton}>
