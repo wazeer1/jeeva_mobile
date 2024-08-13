@@ -6,6 +6,7 @@ import Main from './router/Main.js';
 import Store from './context/Store';
 import SplashScreen from './Components/SplashScreen';
 import messaging, {firebase} from '@react-native-firebase/messaging';
+import {NavigationContainer} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +29,9 @@ function App() {
         <GestureHandlerRootView style={styles.container}>
           <Store>
             <View style={{flex: 1}}>
-              <Main />
+              <NavigationContainer>
+                <Main />
+              </NavigationContainer>
             </View>
           </Store>
         </GestureHandlerRootView>

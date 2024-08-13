@@ -5,6 +5,7 @@ import Home from './Home';
 import MilkDetails from './MilkDetails';
 import {createStackNavigator} from '@react-navigation/stack';
 import PaymentDetails from './PaymentDetails';
+import Notifications from './Notifications';
 
 const Stack = createStackNavigator();
 const HomeCover = () => {
@@ -26,6 +27,11 @@ const HomeCover = () => {
       <Stack.Screen
         name="PaymentDetails"
         component={PaymentDetails}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Notification"
+        component={Notifications}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

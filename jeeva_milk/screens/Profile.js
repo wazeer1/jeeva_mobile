@@ -6,6 +6,7 @@ import {COLORS, globalStyles} from '../Components/constants/constants';
 import {useEffect, useState} from 'react';
 import {profileDetail} from '../api/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {CommonActions} from '@react-navigation/native';
 
 export default function Profile({navigation}) {
   const [profileData, setProfileData] = useState({});
@@ -20,7 +21,14 @@ export default function Profile({navigation}) {
     AsyncStorage.clear()
       .then(() => {
         console.log('Storage successfully cleared!');
-        navigation.navigate('Auth'); // Assuming 'Login' is the screen to navigate to after logout
+
+        // Reset the navigation stack to only include the Auth screen
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{name: 'Auth'}], // Assuming 'Auth' is the screen to navigate to after logout
+          }),
+        );
       })
       .catch(error => {
         console.error('Error clearing storage:', error);
@@ -108,10 +116,10 @@ export default function Profile({navigation}) {
             paddingVertical: 15,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'red',
+            // backgroundColor: 'red',
             borderRadius: 5,
           }}>
-          <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 16}}>
+          <Text style={{color: 'red', fontWeight: 'bold', fontSize: 18}}>
             Log out
           </Text>
         </TouchableOpacity>

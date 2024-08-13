@@ -7,31 +7,41 @@ import Insurance from '../screens/Insurance';
 import Payment from '../screens/Payment';
 import messaging from '@react-native-firebase/messaging';
 // import Settings from '../screens/Settings';
-import {
-  HomeActiveTapIcon,
-  HomeIcon,
-  PaymentActiveTabIcon,
-  PaymentTabIcon,
-  ProfileActiveIcon,
-  ProfileTabIcon,
-  StatusActiveTabIcon,
-  StatusTabIcon,
-} from '../assets/icons';
-import {Image, TouchableOpacity, View} from 'react-native';
+// import {
+//   HomeActiveTapIcon,
+//   HomeIcon,
+//   PaymentActiveTabIcon,
+//   PaymentTabIcon,
+//   ProfileActiveIcon,
+//   ProfileTabIcon,
+//   StatusActiveTabIcon,
+//   StatusTabIcon,
+// } from '../assets/icons';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {CowIcon} from '../assets/images';
 import MilkDetails from '../screens/MilkDetails';
 import HomeCover from '../screens/HomeCover';
 import {registerDevice} from '../api/auth';
+import {
+  HomeActive,
+  HomeIcon,
+  PaymentActiveIcon,
+  PaymentIcon,
+  ProfileActiveIcon,
+  StatusActive,
+  StatusIcon,
+  ProfileIcon,
+  InsureActiveIcon,
+  InsureIcon,
+} from '../assets/svg-icons';
 
 const Tab = createBottomTabNavigator();
 
-const CustomTabBarIcon = ({focused, icon}) => (
-  <Image
-    source={icon}
-    resizeMode="contain"
+const CustomTabBarIcon = ({focused, IconComponent}) => (
+  <IconComponent
+    width={focused ? 30 : 25}
+    height={focused ? 30 : 25}
     style={{
-      width: focused ? 30 : 25,
-      height: focused ? 30 : 25,
       marginBottom: focused ? 5 : 0,
     }}
   />
@@ -80,26 +90,66 @@ const BottomTabNavigator = () => {
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused}) => {
-          let iconName;
+          let IconComponent;
+
           if (route.name === 'Home') {
-            iconName = focused ? HomeActiveTapIcon : HomeIcon;
+            IconComponent = focused ? HomeActive : HomeIcon;
           } else if (route.name === 'Status') {
-            iconName = focused ? StatusActiveTabIcon : StatusTabIcon;
+            IconComponent = focused ? StatusActive : StatusIcon;
           } else if (route.name === 'Payments') {
-            iconName = focused ? PaymentActiveTabIcon : PaymentTabIcon;
+            IconComponent = focused ? PaymentActiveIcon : PaymentIcon;
           } else if (route.name === 'Profile') {
-            iconName = focused ? ProfileActiveIcon : ProfileTabIcon;
+            IconComponent = focused ? ProfileActiveIcon : ProfileIcon;
           } else if (route.name === 'Insurance') {
-            iconName = CowIcon;
+            IconComponent = focused ? InsureActiveIcon : InsureIcon;
           }
-          return <CustomTabBarIcon focused={focused} icon={iconName} />;
+
+          return (
+            <CustomTabBarIcon focused={focused} IconComponent={IconComponent} />
+          );
+        },
+        tabBarLabel: ({focused}) => {
+          // Customize label text, size, and color
+          let labelText;
+
+          switch (route.name) {
+            case 'Home':
+              labelText = 'Home';
+              break;
+            case 'Status':
+              labelText = 'Status';
+              break;
+            case 'Payments':
+              labelText = 'Payments';
+              break;
+            case 'Profile':
+              labelText = 'Profile';
+              break;
+            case 'Insurance':
+              labelText = 'Insurance';
+              break;
+            default:
+              labelText = '';
+          }
+
+          return (
+            <Text
+              style={{
+                fontSize: 14, 
+                color: focused ? '#56C9DC' : '#878C90', 
+                fontWeight: focused ? 'bold' : 'normal',
+              }}>
+              {labelText}
+            </Text>
+          );
         },
         tabBarStyle: {
-          height: 65,
+          height: 80,
           justifyContent: 'center',
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
-          paddingBottom: 10,
+          paddingBottom: 15,
+          paddingTop:10
         },
       })}>
       <Tab.Screen
