@@ -39,19 +39,21 @@ export default function Payment({navigation}) {
       <View style={styles.header}>
         <Text style={styles.headerText}>Payments</Text>
       </View>
-      <FlatList
-        data={paymentData}
-        renderItem={({item}) => <PaymentCard item={item} />}
-        keyExtractor={(item, index) => index.toString()}
-        refreshing={refreshing}
-        onRefresh={fetchPaymentData}
-        ListEmptyComponent={
-          <Text style={styles.emptyMessage}>No payment data available.</Text>
-        }
-        contentContainerStyle={
-          paymentData.length === 0 ? styles.emptyContainer : null
-        }
-      />
+      <View style={{paddingHorizontal: 15}}>
+        <FlatList
+          data={paymentData}
+          renderItem={({item}) => <PaymentCard item={item} />}
+          keyExtractor={(item, index) => index.toString()}
+          refreshing={refreshing}
+          onRefresh={fetchPaymentData}
+          ListEmptyComponent={
+            <Text style={styles.emptyMessage}>No payment data available.</Text>
+          }
+          contentContainerStyle={
+            paymentData.length === 0 ? styles.emptyContainer : null
+          }
+        />
+      </View>
     </View>
   );
 }
@@ -59,7 +61,7 @@ export default function Payment({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     backgroundColor: '#F3F8F9',
   },
   header: {

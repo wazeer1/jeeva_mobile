@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home';
 import Profile from '../screens/Profile';
@@ -21,7 +21,7 @@ import {Image, TouchableOpacity, View} from 'react-native';
 import {CowIcon} from '../assets/images';
 import MilkDetails from '../screens/MilkDetails';
 import HomeCover from '../screens/HomeCover';
-import { registerDevice } from '../api/auth';
+import {registerDevice} from '../api/auth';
 
 const Tab = createBottomTabNavigator();
 
@@ -60,23 +60,22 @@ const CenterTabButton = ({onPress}) => (
 const BottomTabNavigator = () => {
   const [fcmToken, setFCMToken] = useState('');
 
-useEffect(() => {
-  async function getFCMToken() {
-    try {
-      const token = await messaging().getToken();
-      setFCMToken(token);
-      registerDevice(token).then((res)=>{
-        console.log(res);
-      })
-
-    } catch (error) {
-      console.log(error);
+  useEffect(() => {
+    async function getFCMToken() {
+      try {
+        const token = await messaging().getToken();
+        setFCMToken(token);
+        registerDevice(token).then(res => {
+          console.log(res);
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
 
-  getFCMToken();
-}, []);
-console.log(fcmToken,"______token");
+    getFCMToken();
+  }, []);
+  console.log(fcmToken, '______token');
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -100,6 +99,7 @@ console.log(fcmToken,"______token");
           justifyContent: 'center',
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
+          paddingBottom: 10,
         },
       })}>
       <Tab.Screen
@@ -109,7 +109,8 @@ console.log(fcmToken,"______token");
       />
       <Tab.Screen
         name="Status"
-        component={Status}
+        component={MilkDetails}
+        // component={Status}
         options={{headerShown: false}}
       />
       <Tab.Screen

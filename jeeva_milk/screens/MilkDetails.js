@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import MilkCard from '../Components/MilkCard';
-import { milkDetails } from '../api/auth';
+import {milkDetails} from '../api/auth';
+import Header from './Header';
 
 const MilkDetails = () => {
   const [datas, setDatas] = useState([]);
@@ -14,7 +21,7 @@ const MilkDetails = () => {
       const res = await milkDetails();
       console.log(res.data.app_data.data);
       if (res.data.app_data.StatusCode === 6000) {
-        console.log(res.data.app_data.data, "wazeerr_____");
+        console.log(res.data.app_data.data, 'wazeerr_____');
         setDatas(res.data.app_data.data);
       } else {
         setError('Unexpected StatusCode');
@@ -55,18 +62,23 @@ const MilkDetails = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{ marginBottom: 20 }}>
+      <Header />
+      <View style={{marginBottom: 20, paddingHorizontal: 15}}>
         <Text style={styles.head}>Milk Status</Text>
       </View>
-      <FlatList
-        data={datas}
-        renderItem={({ item }) => <MilkCard datas={item} />}
-        keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={{ paddingBottom: 20 }}
-        refreshing={refreshing}
-        onRefresh={onRefresh}
-        ListEmptyComponent={<Text style={styles.emptyText}>No milk data available.</Text>}
-      />
+      <View style={{paddingHorizontal: 15}}>
+        <FlatList
+          data={datas}
+          renderItem={({item}) => <MilkCard datas={item} />}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={{paddingBottom: 20}}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+          ListEmptyComponent={
+            <Text style={styles.emptyText}>No milk data available.</Text>
+          }
+        />
+      </View>
     </View>
   );
 };
@@ -77,7 +89,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F3F8F9',
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     color: '#000',
   },
   head: {

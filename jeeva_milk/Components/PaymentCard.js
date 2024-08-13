@@ -7,11 +7,15 @@ import {
   DownloadIcon,
   PaymentReceivedIcon,
 } from '../assets/images';
+import {useNavigation} from '@react-navigation/native';
 
 const PaymentCard = ({item}) => {
-    console.log(item);
+  console.log(item);
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate('PaymentDetails', {data: item})}>
       {/* <Text style={{fontSize:26,color:'green'}}>Coming Soon...</Text> */}
       <View style={{flexDirection: 'row', alignItems: 'center', gap: 7}}>
         <View
@@ -27,16 +31,18 @@ const PaymentCard = ({item}) => {
         </View>
         <View>
           <Text style={{color: COLORS.text_muted_color}}>Amount</Text>
-          <Text style={{color: COLORS.text_color, fontSize: 20}}>₹{item?.amount}</Text>
+          <Text style={{color: COLORS.text_color, fontSize: 20}}>
+            ₹{item?.amount}
+          </Text>
         </View>
       </View>
       <View style={{alignItems: 'flex-end', gap: 10}}>
         <View style={{flexDirection: 'row', gap: 10}}>
-          <Text style={{color:"#000"}}>{item?.created_at}</Text>
+          <Text style={{color: '#000'}}>{item?.created_at}</Text>
           <Image source={CalenderIcon} />
         </View>
         <View style={{flexDirection: 'row', gap: 10}}>
-          <Text style={{color:'#000'}}>Bank</Text>
+          <Text style={{color: '#000'}}>Bank</Text>
           <Image source={BankIcon} />
         </View>
         {/* <TouchableOpacity style={styles.downloadButton}>
@@ -44,7 +50,7 @@ const PaymentCard = ({item}) => {
           <Text style={{color: '#fff'}}>Download</Text>
         </TouchableOpacity> */}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

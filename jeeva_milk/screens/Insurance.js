@@ -24,6 +24,7 @@ const Insurance = () => {
       setRefresh(false);
     });
   }, [refresh]);
+  console.log(cowData);
   return (
     <>
       <Header />
@@ -59,7 +60,7 @@ const Insurance = () => {
                 style={{flexDirection: 'row', alignItems: 'flex-end', gap: 5}}>
                 <Text
                   style={{color: '#49BFD4', fontSize: 22, fontWeight: '600'}}>
-                  {cowData?.cows_count ? cowData?.cows_count : 0}
+                  {cowData?.cows_count ? cowData?.cows_count : cowData.length}
                 </Text>
                 <Text style={{color: '#878787', fontSize: 16}}>cows</Text>
               </View>
@@ -75,7 +76,7 @@ const Insurance = () => {
                 style={{flexDirection: 'row', alignItems: 'flex-end', gap: 5}}>
                 <Text
                   style={{color: '#4A4D4E', fontSize: 22, fontWeight: '600'}}>
-                  {cowData?.insured_cow_count ? cowData?.insured_cow_count : 0}
+                  {cowData?.insured_cow_count ? cowData.insured_cow_count : 0}
                 </Text>
                 <Text style={{color: '#878787', fontSize: 16}}>cows</Text>
               </View>
@@ -91,7 +92,8 @@ const Insurance = () => {
                 style={{flexDirection: 'row', alignItems: 'flex-end', gap: 5}}>
                 <Text
                   style={{color: '#4A4D4E', fontSize: 22, fontWeight: '600'}}>
-                  {cowData?.uninsured_count ? cowData?.uninsured_count : 0}
+                  {/* {cowData?.uninsured_count ? cowData?.uninsured_count : 0} */}
+                  {cowData?.uninsured_count ? cowData.uninsured_count : 0}
                 </Text>
                 <Text style={{color: '#878787', fontSize: 16}}>cows</Text>
               </View>
