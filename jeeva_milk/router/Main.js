@@ -1,5 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {NavigationContainer, CommonActions} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  CommonActions,
+  useNavigation,
+} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginScreen from '../screens/LoginScreen';
@@ -10,8 +14,8 @@ const Stack = createStackNavigator();
 
 const Main = () => {
   const navigationRef = useRef(null);
-  const [userData, setUserData] = useState();
-
+  const [userData, setUserData] = useState(null);
+  const navigation = useNavigation();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,39 +23,35 @@ const Main = () => {
         if (jsonValue) {
           const userData = JSON.parse(jsonValue);
           setUserData(userData.access);
+          if (userData) {
+            navigation.navigate('Private');
+          } else {
+            navigation.navigate('Auth');
+          }
         }
       } catch (e) {
-        // console.log(e, 'error+++=====');
         // Handle the error appropriately
       }
     };
 
     fetchData();
-  }, []);
+  });
 
-  return userData ? <BottomTabNavigator /> : <LoginScreen />;
-
-  // return (
-  //   <NavigationContainer ref={navigationRef}>
-  //     <Stack.Navigator initialRouteName="Auth">
-  //       <Stack.Screen
-  //         name="Auth"
-  //         component={LoginScreen}
-  //         options={{headerShown: false}}
-  //       />
-  //       <Stack.Screen
-  //         name="Private"
-  //         component={BottomTabNavigator}
-  //         options={{headerShown: false}}
-  //       />
-  //       {/* <Stack.Screen
-  //         name="Notification"
-  //         component={Notifications}
-  //         options={{headerShown: false}}
-  //       /> */}
-  //     </Stack.Navigator>
-  //   </NavigationContainer>
-  // );
+  return (
+    <Stack.Navigator initialRouteName={userData ? 'Private' : 'Auth'}>
+      <Stack.Screen
+        name="Auth"
+        component={LoginScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Private"
+        component={BottomTabNavigator}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+    // </NavigationContainer>
+  );
 };
 
 export default Main;

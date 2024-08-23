@@ -68,7 +68,7 @@ const LoginScreen = ({navigation}) => {
         };
 
         dispatch({type: 'UPDATE_USER_DATA', payload: userData});
-        await storeUserDataAsync(userData); // Assuming storeData is async
+        await storeUserDataAsync(userData);
         navigation.navigate('Private');
       } else {
         console.log(res, '____Response___');

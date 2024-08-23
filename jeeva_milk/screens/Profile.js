@@ -22,13 +22,7 @@ export default function Profile({navigation}) {
       .then(() => {
         console.log('Storage successfully cleared!');
 
-        // Reset the navigation stack to only include the Auth screen
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [{name: 'Auth'}], // Assuming 'Auth' is the screen to navigate to after logout
-          }),
-        );
+        navigation.navigate('Auth');
       })
       .catch(error => {
         console.error('Error clearing storage:', error);

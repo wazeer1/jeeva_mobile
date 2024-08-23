@@ -7,8 +7,10 @@ import Store from './context/Store';
 import SplashScreen from './Components/SplashScreen';
 import messaging, {firebase} from '@react-native-firebase/messaging';
 import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 function App() {
   const [splashScreen, setSplashScreen] = useState(true);
@@ -30,7 +32,13 @@ function App() {
           <Store>
             <View style={{flex: 1}}>
               <NavigationContainer>
-                <Main />
+                <Stack.Navigator initialRouteName={'Main'}>
+                  <Stack.Screen
+                    name="Main"
+                    component={Main}
+                    options={{headerShown: false}}
+                  />
+                </Stack.Navigator>
               </NavigationContainer>
             </View>
           </Store>
